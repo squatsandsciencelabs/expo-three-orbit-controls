@@ -46,6 +46,7 @@ const OrbitControlsView = React.forwardRef(
     );
 
     const responder = React.useMemo(() => {
+      let touchesLng;
       function onTouchEnded(nativeEvent) {
         const polyfill = polyfillEventTouches(nativeEvent);
 
@@ -71,6 +72,11 @@ const OrbitControlsView = React.forwardRef(
           return controls?.onTouchStart(nativeEvent);
         },
         onPanResponderMove({ nativeEvent }) {
+          if (touchesLng !== nativeEvent.touches.length) {
+            touchesLng = nativeEvent.touches.length;
+            onTouchEnded(nativeEvent);
+            controls?.onTouchStart(nativeEvent);
+          }
           return controls?.onTouchMove(nativeEvent);
         },
         onPanResponderRelease({ nativeEvent }) {
