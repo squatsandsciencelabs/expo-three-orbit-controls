@@ -152,7 +152,7 @@ export class OrbitControls extends EventDispatcher {
 
   private panLeft: (distance: number, objectMatrix: Matrix4) => void;
   private panUp: (distance: number, objectMatrix: Matrix4) => void;
-  private pan: (deltaX: number, deltaY: number) => void;
+  public pan: (deltaX: number, deltaY: number) => void;
 
   public domElement?: any;
 
@@ -380,14 +380,14 @@ export class OrbitControls extends EventDispatcher {
           // orthographic
           this.panLeft(
             (deltaX * (this.object.right - this.object.left)) /
-              this.object.zoom /
-              this.getElementWidth(),
+            this.object.zoom /
+            this.getElementWidth(),
             this.object.matrix
           );
           this.panUp(
             (deltaY * (this.object.top - this.object.bottom)) /
-              this.object.zoom /
-              this.getElementHeight(),
+            this.object.zoom /
+            this.getElementHeight(),
             this.object.matrix
           );
         } else {
@@ -474,15 +474,15 @@ export class OrbitControls extends EventDispatcher {
     return 0.95 ** this.zoomSpeed;
   };
 
-  private rotateLeft = (angle: number) => {
+  public rotateLeft = (angle: number) => {
     this.sphericalDelta.theta -= angle;
   };
 
-  private rotateUp = (angle: number) => {
+  public rotateUp = (angle: number) => {
     this.sphericalDelta.phi -= angle;
   };
 
-  private dollyIn = (dollyScale: number) => {
+  public dollyIn = (dollyScale: number) => {
     if (this.object.isPerspectiveCamera) {
       this.scale /= dollyScale;
     } else if (this.object.isOrthographicCamera) {
@@ -500,7 +500,7 @@ export class OrbitControls extends EventDispatcher {
     }
   };
 
-  private dollyOut = (dollyScale: number) => {
+  public dollyOut = (dollyScale: number) => {
     if (this.object.isPerspectiveCamera) {
       this.scale *= dollyScale;
     } else if (this.object.isOrthographicCamera) {
@@ -667,6 +667,7 @@ export class OrbitControls extends EventDispatcher {
   };
 
   private handleTouchStartDolly = ({ touches }) => {
+
     const dx = touches[0].pageX - touches[1].pageX;
     const dy = touches[0].pageY - touches[1].pageY;
 
