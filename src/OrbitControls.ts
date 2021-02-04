@@ -84,7 +84,7 @@ export class OrbitControls extends EventDispatcher {
   rotateSpeed = 1.0;
 
   // Set to false to disable panning
-  enablePan = true;
+  enablePan = false;
   panSpeed = 1.0;
   screenSpacePanning = false; // if true, pan in screen-space
   keyPanSpeed = 7.0; // pixels moved per arrow key push
