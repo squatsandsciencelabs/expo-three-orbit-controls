@@ -85,6 +85,8 @@ const OrbitControlsView = React.forwardRef(
         onPanResponderTerminate({ nativeEvent }) {
           return onTouchEnded(nativeEvent);
         },
+        onPanResponderTerminationRequest: () => false,
+        onShouldBlockNativeResponder: (evt, gestureState) => true,
       });
     }, [controls]);
 
